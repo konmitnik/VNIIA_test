@@ -11,19 +11,19 @@ public partial class VniiaSharpContext : DbContext
     private readonly IConfiguration Configuration;
     public VniiaSharpContext()
     {
-        /*Configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetParent(Directory.GetCurrentDirectory()))
+        Configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\..")
             .AddJsonFile("appsettings.json")
-            .Build();*/
+            .Build();
     }
 
     public VniiaSharpContext(DbContextOptions<VniiaSharpContext> options)
         : base(options)
     {
-        /*Configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetParent(Directory.GetCurrentDirectory()))
+        Configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\..")
             .AddJsonFile("appsettings.json")
-            .Build();*/
+            .Build();
     }
 
     public virtual DbSet<Document> Documents { get; set; }
@@ -31,7 +31,7 @@ public partial class VniiaSharpContext : DbContext
     public virtual DbSet<Position> Positions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=vniia_sharp;Username=postgres;Password=123");
+        => optionsBuilder.UseNpgsql(Configuration.GetConnectionString("PostgreSQL"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

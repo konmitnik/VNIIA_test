@@ -1,3 +1,5 @@
+using VNIIA_test.Forms;
+
 namespace VNIIA_test
 {
     internal static class Program

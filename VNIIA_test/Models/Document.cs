@@ -5,7 +5,7 @@ namespace VNIIA_test.Models;
 
 public partial class Document
 {
-    public int Id;
+    public int Id { get; }
 
     public int Number { get; set; }
 
